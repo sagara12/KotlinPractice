@@ -1,6 +1,8 @@
 
 package com.example.kotlinpractice
 
+import org.jetbrains.annotations.NotNull
+
 //코틀린 실행 함수
 fun main () {
     helloWorld()
@@ -12,6 +14,9 @@ fun main () {
     println("This is 2\$")
     checkNumber(80)
 
+    forAndWhile()
+    nullcheck()
+    ignoreNuils("abbbb")
 }
 
 //1. 함수 (리턴형이 없을때는 Unit 기입 안써줘되 됨)
@@ -85,3 +90,99 @@ fun checkNumber(score : Int) {
         else -> println("OK")
     }
 }
+
+// Expression vs Statement 코틀린의 모든 함수는 Expression
+
+// Array and List
+
+// Array 처음에 크기 할당
+
+// List -> 1. reatable List (읽기 전용) 2.Mutable List (읽기, 쓰기 가능)
+
+fun array() {
+    val array : Array<Int> = arrayOf(1,2,3)
+    val list : List<Int> = listOf(1,2,3)
+
+    val array2 : Array<Any> = arrayOf(1,"b", 3.4f)
+    val list2 : List<Any> = listOf(1,"d", 11L)
+
+    array[0] = 3
+    val result : Int = list.get(0)
+
+    val arrayList : ArrayList<Int> = ArrayList<Int>()
+    arrayList.add(10)
+    arrayList.add(20)
+    arrayList[0] = 20
+}
+
+// for , while
+
+fun forAndWhile () {
+
+    val students : Array<String> = arrayOf("James", "Cris", "Jack", "Jenny")
+
+    for ( name : String in students) {
+        println("${name}")
+    }
+
+    for ((index : Int, name : String) in students.withIndex()) {
+        println("${index+1}번째 학생 : ${name}")
+    }
+
+    var sum : Int = 0
+    for ( i : Int in 1..10 step 2) {
+        sum += i
+    }
+
+
+
+//    for ( i : Int in 1..10 downTo 1) {
+//        sum += i
+//    }
+
+//    for ( i : Int in 1..10 util 1) {
+//        sum += i
+//    }
+    println(sum)
+    var index : Int = 0
+    while (index < 10) {
+        println("current index : ${index}")
+        index++
+    }
+
+}
+
+// Nullable / NonNull
+fun nullcheck() {
+    //NPE : Null pointer Exception
+
+    //NonNull
+    var name  = "cris"
+
+    //Nullable ->  ?를 붙여주면 됨
+    var nullName : String? = null
+
+    var nameInUpperCase : String = name.uppercase()
+
+    var nullnameInUpperCase : String? = nullName?.uppercase()
+
+    //?:
+
+    val lastName : String? = null
+
+    val fullName : String = name + " " +(lastName?: "No last Name")
+
+    println(fullName)
+}
+
+//!! -> 컴파일러 한테 이 변수는 NULL이 아니다라고 알려줄때 씀
+fun ignoreNuils(str : String){
+    val NotNull : String = str!!
+    val upper: String = NotNull.uppercase()
+
+    val email : String = "sagara12@naver.com"
+    email?.let{
+        println("my email is ${email}")
+    }
+}
+
