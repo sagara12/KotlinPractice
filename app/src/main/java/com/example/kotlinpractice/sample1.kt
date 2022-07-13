@@ -50,7 +50,7 @@ fun hi(){
     var e : String
 }
 
-// 조건식
+// 조건식 1
 fun cal (a : Int , b: Int) : Int {
     if (a>b){
         return a
